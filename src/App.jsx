@@ -9,8 +9,8 @@ import AddContent from './components/AddContent.jsx';
 import EditContent from './components/EditContent.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import ContentProvider from './context/Content_context.jsx';
-
-
+import Comment from './components/Comment.jsx';
+import ViewComment from './components/ViewComment.jsx';
 
 
 
@@ -21,9 +21,11 @@ function App() {
   return (
     <AuthProvider>
       <ContentProvider>
-        <div className='flex'>
-          <SideBar />
-          <main>
+        <div className='flex flex-col items-center justify-center'>
+          <div className=''>
+          <SideBar  />
+          </div>
+          <main className='flex flex-col justify-center items-center'>
             <Routes>
               <Route path='/' element={<Navigate to="/login" replace />} />
               <Route path='/login' element={<LogIn />} />
@@ -34,6 +36,14 @@ function App() {
               </PrivateRoute>} />
               <Route path='/edit/:id' element={<PrivateRoute>
                 <EditContent />
+              </PrivateRoute>} />
+
+              <Route path='/comment/:id' element={<PrivateRoute>
+                <Comment />
+              </PrivateRoute>} />
+
+              <Route path='/viewComment/:id' element={<PrivateRoute>
+                <ViewComment />
               </PrivateRoute>} />
 
             </Routes>

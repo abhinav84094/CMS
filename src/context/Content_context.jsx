@@ -8,6 +8,7 @@ export default function ContentProvider({children}) {
   
   const addContent = (content)=>{
     setContents((prev)=>[...prev, {...content, comments:[]}]);
+    console.log(content);
   }
 
   const editContent = (updatedContent)=>{
@@ -18,11 +19,18 @@ export default function ContentProvider({children}) {
     setContents((prev)=>prev.filter((item)=>item.id!==id));
   }
 
-  const addComment = (contentId, comment)=>{
-    setContents((prev)=>{
-        prev.map((item)=>item.id===contentId ? {...item, comments:[...item.comments, comment]}: item);
-    })
-  }
+  const addComment = (contentId, comment) => {
+    setContents((prev) =>
+      prev.map((item) =>
+        item.id === contentId
+          ? { ...item, comments: [...item.comments, comment] }
+          : item
+      )
+    );
+  };
+  
+   
+  
 
 
   return (
@@ -30,6 +38,8 @@ export default function ContentProvider({children}) {
         {children}
     </ContentContext.Provider>
   )
+
+  
 }
 
 

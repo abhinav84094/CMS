@@ -1,20 +1,19 @@
-import React, { useState } from 'react'
-import { useAuth } from '../context/Auth_context'
-import { Link,useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useAuth } from '../context/Auth_context';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LogIn() {
-
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const {users, login} = useAuth();
+  const { login } = useAuth();
 
-  const handleSubmit = async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!username || !password){
-      setError("enter username and password");
-      return ;
+    if (!username || !password) {
+      setError("Enter username and password");
+      return;
     }
 
     const result = await login(username, password);
@@ -22,38 +21,59 @@ function LogIn() {
     if (result.success) {
       navigate('/view'); // Redirect on successful login
     } else {
-      setError(result.error || 'Invalid username or password'); // Show error message
-      return ;
+      setError(result.error || 'Invalid username or password');
+      return;
     }
 
     setUsername("");
     setPassword("");
-    
-  }
-
+  };
 
   return (
-    <div className='flex flex-col gap-5 border border-white m-20'>
-    <h2 className='text-4xl ml-[20%]'>LogIn</h2>
-    <form onSubmit={handleSubmit} className='flex flex-col gap-5 mr-10'>
-      <div>
-        <label className='ml-20 '>Enter username : </label>
-        <input className='border border-white' onChange={(e)=>setUsername(e.target.value)} placeholder='username' type='text' value={username} />
-      </div>
-      <div>
-        <label className='ml-20 '>Enter password : </label>
-        <input className='border border-white' onChange={(e)=>setPassword(e.target.value)} placeholder='password' type='text' value={password} />
-      </div>
-    
-      {error && <div className='ml-40'>{error}</div>}
-      <button className='w-50 ml-[30%]' type='submit'>LogIn</button>
-      {/* {username!==users.username && <p>invalid username <Link to="/signup">SignUp</Link></p>} */}
-      <p className='text-center'>
-          Don't have an account? <Link to='/signUp' className='text-blue-500'>Sign Up</Link>
-        </p>
-    </form>
+    <div className='flex justify-center items-center'>
+
+      <div className='max-w-md mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-lg text-white'>
+            <h2 className='text-4xl text-center'>Log In</h2>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-5 mt-6'>
+
+              <div className='flex flex-col'>
+                <label>Enter username:</label>
+                <input 
+                  className='p-2 border border-white rounded bg-gray-700 text-white' 
+                  onChange={(e) => setUsername(e.target.value)} 
+                  placeholder='Username' 
+                  type='text' 
+                  value={username} 
+                />
+              </div>
+
+              <div className='flex flex-col'>
+                <label>Enter password:</label>
+                <input 
+                  className='p-2 border border-white rounded bg-gray-700 text-white' 
+                  onChange={(e) => setPassword(e.target.value)} 
+                  placeholder='Password' 
+                  type='password' 
+                  value={password} 
+                />
+              </div>
+
+              {error && <div className='text-center text-red-500'>{error}</div>}
+
+              <button 
+                className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition' 
+                type='submit'
+              >
+                Log In
+              </button>
+
+              <p className='text-center'>
+                Don't have an account? <Link to='/signUp' className='text-blue-500'>Sign Up</Link>
+              </p>
+            </form>
+          </div>
     </div>
-  )
+  );
 }
 
-export default LogIn
+export default LogIn;

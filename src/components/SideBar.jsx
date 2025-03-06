@@ -13,12 +13,12 @@ function SideBar() {
   }
 
   return (
-    <div className='bg-gray-600 w-[20vw] h-[100vh] '>
-      <h2 className='text-3xl font-bold'>CMS Portal</h2>
-      <nav>
+    <div className='bg-gray-600 w-[100vw] flex justify-between fixed top-0 left-0'>
+      <h2 className='text-3xl font-bold ml-4'>CMS Portal</h2>
+      <nav className=''>
         <ul>
           {user ? (
-            <>
+            <div className="flex gap-12 mr-5 justify-center items-center">
               <li>
                 <NavLink to="/add">
                   Add Content
@@ -29,9 +29,9 @@ function SideBar() {
                   View Content
                 </NavLink>
               </li>
-            </>
+            </div>
           ):(
-            <>
+            <div className="flex gap-12 mr-5">
               <li>
                 <NavLink to="/login">
                   LogIn
@@ -42,13 +42,13 @@ function SideBar() {
                   SignUp
                 </NavLink>
               </li>
-            </>
+            </div>
           )}
         </ul>
       </nav>
       {user && (
-        <div>
-          <button onClick={handleLogout}>LogOut</button>
+        <div className='mr-10'>
+          <button onClick={handleLogout} >LogOut</button>
         </div>
       )}
     </div>
