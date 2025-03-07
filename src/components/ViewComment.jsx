@@ -16,7 +16,7 @@ function ViewComment() {
   return (
     <>
     <div className="text-white flex flex-col items-center mt-10">
-      <h2 className="text-3xl font-bold mb-6">View Contents</h2>
+      <h2 className="text-3xl font-bold mb-6">View Comments</h2>
       <div className="flex flex-col items-center justify-center w-[100vw] gap-10">
         
           <div>
@@ -45,6 +45,7 @@ function ViewComment() {
             />
             <button onClick={postComment}>Post</button> */}
 
+            <div className='text-white text-2xl font-bold'>Comments</div>
             {item.comments && item.comments.map((comment, index)=>(
                 <div>{comment}</div>
             ))}

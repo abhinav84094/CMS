@@ -70,7 +70,7 @@ function EditContent() {
     setError("");
     setImgurl("");
     localStorage.removeItem("contentDraft");
-    navigate("/view");
+    navigate(`/view/${owner}`);
   };
 
 

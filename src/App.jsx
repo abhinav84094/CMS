@@ -30,7 +30,9 @@ function App() {
               <Route path='/' element={<Navigate to="/login" replace />} />
               <Route path='/login' element={<LogIn />} />
               <Route path='/signUp' element={<SignUp />} />
+              <Route path='/view/:me' element={<ViewContent />} />
               <Route path='/view' element={<ViewContent />} />
+
               <Route path='/add' element={<PrivateRoute>
                 <AddContent />
               </PrivateRoute>} />

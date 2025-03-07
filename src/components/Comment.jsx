@@ -23,7 +23,7 @@ function Comment() {
       return;
     }
     addComment(parseInt(id), comment);  
-    navigate("/view");
+    navigate(-1);
     setComment(""); // Clear the input after posting
   };
   

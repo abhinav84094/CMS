@@ -15,6 +15,7 @@ function AddContent() {
   const [category, setCategory] = useState("");
   const [error, setError] = useState("");
   const [imgurl, setImgurl] = useState("");
+  
 
   useEffect(() => {
     const draft = localStorage.getItem("contentDraft");
@@ -25,6 +26,7 @@ function AddContent() {
         setBody(body || "");
         setCategory(category || "Misc");
         setImgurl(imgurl || "");
+        setTime(new Date());
       } catch (err) {
         console.error("Error in parsing draft ", err);
       }
@@ -49,10 +51,11 @@ function AddContent() {
       body,
       category,
       imgurl,
-      date: new Date().toISOString(),
+      date: new Date().toLocaleString(),
       author: user.username,
     };
 
+    console.log(newContent);
     addContent(newContent);
     setOwner("");
     // setTitle("");
@@ -61,7 +64,7 @@ function AddContent() {
     setError("");
     setImgurl("");
     localStorage.removeItem("contentDraft");
-    navigate("/view");
+    navigate(`/view/${user.username}`);
   };
 
   return (
