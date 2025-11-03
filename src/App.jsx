@@ -40,7 +40,7 @@ function App() {
                 <EditContent />
               </PrivateRoute>} />
 
-              <Route path='/comment/:id' element={<PrivateRoute>
+              <Route path='/comment/:commenter/:id' element={<PrivateRoute>
                 <Comment />
               </PrivateRoute>} />
 

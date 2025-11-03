@@ -26,7 +26,6 @@ function AddContent() {
         setBody(body || "");
         setCategory(category || "Misc");
         setImgurl(imgurl || "");
-        setTime(new Date());
       } catch (err) {
         console.error("Error in parsing draft ", err);
       }

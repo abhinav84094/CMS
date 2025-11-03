@@ -1,14 +1,16 @@
 import React from "react";
 import { useContentContext } from "../context/Content_context.jsx";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../context/Auth_context.jsx";
 
 function ViewContent() {
 
   const navigate = useNavigate();
 
   const {me} = useParams();
+  const { user } = useAuth();
 
-  const { contents } = useContentContext();
+  const { contents, deleteContent } = useContentContext();
 
   if (!contents || contents.length === 0) {
     return <div className="text-white text-center mt-10 text-xl">No content available.</div>;
@@ -19,16 +21,34 @@ function ViewContent() {
     if(me == item.owner){
       navigate(`/edit/${item.id}`);
     }
-    console.log("You are not owner");
+    else{
+      alert("You are not permitted to edit this content");
+    }
   }
 
+  const handleDelete = (item) => {
+    if(me == item.owner){
+      if (window.confirm("Are you sure you want to delete this content?")) {
+        deleteContent(item.id);
+      }
+    }
+    else{
+      alert("You are not permitted to delete this content");
+    }
+
+  };
+  
+
   const handleComment = (id)=>{
-    navigate(`/comment/${id}`);
+    navigate(`/comment/${user.username}/${id}`);
   }
 
   const handleOldComment = (id)=>{
     const content = contents.find(item => item.id === id) ;
-    content.comments.length ? navigate(`/viewComment/${id}`) : navigate(`/view/${me}`) ;
+    if (content && content.comments.length) {
+      navigate(`/viewComment/${id}`);
+    } else {
+      alert("No comments found for this post.");    }
   }
 
 
@@ -42,10 +62,13 @@ function ViewContent() {
             <div className="text-[11px]">{item.date}</div>
             <div className="flex justify-between">
             <h3 className="text-xl font-bold text-yellow-300">{item.owner}</h3>
-            <div className="flex gap-5 ">
-              <button onClick={()=> handleEdit(item)}>Edit</button>
-              <button>Delete</button>
-            </div>
+            {user.username === me && (
+              <div className="flex gap-5">
+                <button onClick={() => handleEdit(item)}>Edit</button>
+                <button onClick={() => handleDelete(item)}>Delete</button>
+              </div>
+            )}
+
             </div>
             <p className="mt-2 text-gray-300">{item.body}</p>
             {item.imgurl && (

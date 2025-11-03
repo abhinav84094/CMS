@@ -4,13 +4,12 @@ import { useContentContext } from '../context/Content_context';
 
 function Comment() {
 
-  const {id} = useParams();
+  const {id, commenter} = useParams();
   const navigate = useNavigate();
 
   const {contents, addComment} = useContentContext();
   
   const item = contents.find((item)=>item.id===parseInt(id));
-  console.log(item);
 
   const [comment, setComment] = useState();
 
@@ -22,7 +21,17 @@ function Comment() {
       console.log("Comment not found");
       return;
     }
-    addComment(parseInt(id), comment);  
+
+    const newComment = {
+      id: Date.now(),
+      commenter,
+      comment,
+      // title,
+      date: new Date().toLocaleString(),
+    };
+
+
+    addComment(parseInt(id), newComment);  
     navigate(-1);
     setComment(""); // Clear the input after posting
   };

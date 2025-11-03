@@ -33,6 +33,8 @@ function SignUp() {
 
     const result = signUp(username, password);
 
+    console.log(result);
+
     if (result.success) {
       navigate('/viewContent');
     } else {

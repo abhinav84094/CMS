@@ -46,9 +46,20 @@ function ViewComment() {
             <button onClick={postComment}>Post</button> */}
 
             <div className='text-white text-2xl font-bold'>Comments</div>
-            {item.comments && item.comments.map((comment, index)=>(
-                <div>{comment}</div>
-            ))}
+            {Array.isArray(item?.comments) && item.comments.length > 0 ? (
+              item.comments.map((comment, index) => (
+                <div key={index} className='w-[500px] bg-gray-700 text-white rounded-lg p-3 mb-3 shadow-sm'>
+                  <div className='flex justify-between text-sm text-gray-400 mb-1'>
+                    <span className='font-semibold text-yellow-300'>{comment.commenter}</span>
+                    <span>{comment.date}</span>
+                  </div>
+                  <p className='text-gray-200 text-base'>{comment.comment}</p>
+                </div>
+              ))
+            ) : (
+              <p className='text-gray-400 text-sm mt-3'>No comments yet.</p>
+            )}
+
 
           </div>
 
