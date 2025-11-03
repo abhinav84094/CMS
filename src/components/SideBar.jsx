@@ -33,12 +33,20 @@ function SideBar() {
           ):(
             <div className="flex gap-12 mr-5">
               <li>
-                <NavLink to="/login">
+                <NavLink to="/login" className={({ isActive }) =>
+                    isActive
+                      ? "text-yellow-400 font-semibold"
+                      : "text-white hover:text-yellow-300"
+                  }>
                   LogIn
                 </NavLink>
               </li>
-              <li className=''>
-                <NavLink to="/signUp">
+              <li className='text-white'>
+                <NavLink to="/signUp" className={({ isActive }) =>
+                    isActive
+                      ? "text-yellow-400 font-semibold"
+                      : "text-white hover:text-yellow-300"
+                  }>
                   SignUp
                 </NavLink>
               </li>

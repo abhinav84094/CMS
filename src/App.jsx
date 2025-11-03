@@ -11,6 +11,7 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 import ContentProvider from './context/Content_context.jsx';
 import Comment from './components/Comment.jsx';
 import ViewComment from './components/ViewComment.jsx';
+import './App.css'
 
 
 
@@ -25,7 +26,7 @@ function App() {
           <div className=''>
           <SideBar  />
           </div>
-          <main className='flex flex-col justify-center items-center'>
+          <main className='flex flex-col justify-center items-center w-[100vw]'>
             <Routes>
               <Route path='/' element={<Navigate to="/login" replace />} />
               <Route path='/login' element={<LogIn />} />
